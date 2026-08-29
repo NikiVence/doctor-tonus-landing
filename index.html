@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ДОКТОР ТОНУС — Верните телу лёгкость</title>
+<meta name="description" content="Массаж и процедуры для тех, кто хочет снова чувствовать себя хорошо. Запись онлайн.">
+<meta property="og:title" content="ДОКТОР ТОНУС — Верните телу лёгкость">
+<meta property="og:description" content="Массаж и процедуры для тех, кто хочет снова чувствовать себя хорошо.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* ---- Site B specific: faster rhythm, punchier blocks ---- */
+  .l-hero{
+    position:relative; height:100svh; min-height:600px; color:var(--white);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .l-hero .ph{ position:absolute; inset:0; }
+  .l-hero-top{ position:relative; z-index:2; padding:110px var(--pad) 0; text-align:center; }
+  .l-hero-top .brandline{ font-size:0.76rem; letter-spacing:0.3em; font-weight:700; color:var(--gold); }
+  .l-hero-body{ position:relative; z-index:2; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 var(--pad); }
+  .l-hero-body h1{ font-size:clamp(3rem,10vw,6.6rem); color:var(--white); }
+  .l-hero-body .lead{ margin-top:24px; max-width:36ch; font-size:1.1rem; color:rgba(250,249,245,.88); font-weight:400; }
+  .l-hero-body .cta-row{ margin-top:38px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+
+  /* problem */
+  .l-problem{ background:var(--beige); padding:130px 0; text-align:center; }
+  .l-problem h2{ font-size:clamp(2.2rem,5vw,3.6rem); }
+  .l-words{ margin-top:64px; display:flex; flex-wrap:wrap; gap:14px 28px; justify-content:center; }
+  .l-words span{
+    font-family:var(--serif); font-style:italic; font-weight:500;
+    font-size:clamp(1.8rem,5.4vw,3.6rem); color:var(--forest-dark);
+  }
+
+  /* solution */
+  .l-solution{ background:var(--forest-dark); color:var(--white); padding:0; }
+  .l-solution-grid{ display:grid; grid-template-columns:1fr 1fr; min-height:78vh; }
+  .l-solution-text{ display:flex; flex-direction:column; justify-content:center; padding:80px clamp(28px,6vw,88px); }
+  .l-solution-text h2{ font-size:clamp(2.4rem,4.6vw,3.8rem); color:var(--white); }
+  .l-solution-text p{ margin-top:24px; max-width:42ch; color:rgba(250,249,245,.75); font-size:1.05rem; line-height:1.75; }
+  .l-solution-text .btn{ margin-top:32px; align-self:flex-start; }
+  .l-solution-media{ min-height:420px; }
+  @media (max-width:920px){ .l-solution-grid{ grid-template-columns:1fr; } }
+
+  /* services 3-5 */
+  .l-services{ padding:130px 0; }
+  .l-services .section-head{ text-align:center; max-width:640px; margin:0 auto 64px; }
+  .l-services h2{ font-size:clamp(2.2rem,4.4vw,3.4rem); margin-top:16px; }
+  .svc-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
+  .svc-cardB{ background:var(--white); padding:0; display:flex; flex-direction:column; }
+  .svc-cardB .media{ aspect-ratio:4/3; }
+  .svc-cardB .body{ padding:28px 26px 32px; flex:1; display:flex; flex-direction:column; }
+  .svc-cardB h3{ font-size:1.25rem; letter-spacing:-0.01em; }
+  .svc-cardB p{ margin-top:10px; font-size:0.9rem; color:var(--ink-soft); flex:1; }
+  .svc-meta{ margin-top:16px; display:flex; justify-content:space-between; font-size:0.78rem; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:14px; }
+  .svc-cardB .link-underline{ margin-top:18px; }
+  @media (max-width:920px){ .svc-cards{ grid-template-columns:1fr; } }
+
+  /* featured offer */
+  .l-offer{ background:var(--forest); color:var(--white); padding:120px 0; text-align:center; }
+  .l-offer h2{ font-size:clamp(2.2rem,4.6vw,3.6rem); color:var(--white); }
+  .l-offer p{ margin:24px auto 0; max-width:46ch; color:rgba(250,249,245,.82); font-size:1.05rem; line-height:1.7; }
+  .l-offer .cta-row{ margin-top:36px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* how it works */
+  .l-steps{ padding:130px 0; background:var(--cream); }
+  .steps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:64px; background:var(--line); }
+  .step{ background:var(--cream); padding:52px 36px; text-align:center; }
+  .step .num{ font-family:var(--serif); font-style:italic; font-size:3rem; color:var(--gold); }
+  .step h3{ margin-top:18px; font-size:1.25rem; letter-spacing:-0.01em; }
+  @media (max-width:820px){ .steps-grid{ grid-template-columns:1fr; } }
+
+  /* social proof */
+  .l-proof{ padding:110px 0 90px; background:var(--cream); }
+  .l-proof .section-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .l-proof h2{ font-size:clamp(2.2rem,4.4vw,3.4rem); margin-top:16px; }
+  .reviews-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
+  .rev-cardB{ background:var(--white); padding:40px 34px; display:flex; flex-direction:column; gap:18px; }
+  .rev-cardB .stars{ color:var(--gold); letter-spacing:3px; font-size:0.85rem; }
+  .rev-cardB blockquote{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:1.2rem; line-height:1.55; flex:1; }
+  .rev-cardB .who{ font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); }
+  @media (max-width:920px){ .reviews-grid{ grid-template-columns:1fr; } }
+
+  /* atmosphere */
+  .l-atmo{ position:relative; height:clamp(280px, 32vw, 420px); overflow:hidden; }
+  .l-atmo-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; z-index:2; color:var(--white); }
+  .l-atmo-overlay h2{ font-size:clamp(2.4rem,6vw,4.4rem); color:var(--white); }
+
+  /* faq */
+  .l-faq{ padding:100px 0; }
+  .l-faq .wrap{ max-width:860px; }
+
+  /* final cta */
+  .l-final{ background:#0A2019; color:var(--white); min-height:70vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px var(--pad); }
+  .l-final h2{ font-size:clamp(2.8rem,7vw,5.4rem); color:var(--white); }
+  .l-final .btn{ margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header class="site-header on-dark" id="siteHeader">
+  <div class="wrap header-row">
+    <a class="brand-word" href="#top">ДОКТОР <span class="serif">Тонус</span></a>
+    <nav class="header-nav" aria-label="Разделы">
+      <a href="#services">Процедуры</a>
+      <a href="#proof">Отзывы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-outline-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="l-hero">
+    <div class="ph ph-tone-forest" aria-hidden="true"></div>
+    <div class="l-hero-top"><span class="brandline">ДОКТОР ТОНУС</span></div>
+    <div class="l-hero-body">
+      <h1 class="reveal-mask"><span>Верните телу</span> <span class="serif">лёгкость.</span></h1>
+      <p class="lead">Массаж и процедуры для тех, кто хочет снова чувствовать себя хорошо.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Записаться</span><span class="arrow">→</span></a>
+        <a class="btn btn-outline-cream" href="#services"><span>Посмотреть процедуры</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="l-problem">
+    <div class="wrap">
+      <span class="eyebrow" style="justify-content:center;">Знакомо?</span>
+      <h2 class="reveal" style="margin-top:20px;">Узнаёте <span class="serif">себя?</span></h2>
+      <div class="l-words stagger">
+        <span>ТЯЖЕСТЬ</span>
+        <span>УСТАЛОСТЬ</span>
+        <span>НАПРЯЖЕНИЕ</span>
+        <span>ОТЁЧНОСТЬ</span>
+        <span>ЗАЖАТОСТЬ</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="l-solution">
+    <div class="l-solution-grid">
+      <div class="l-solution-text reveal">
+        <span class="eyebrow" style="color:var(--gold);">Решение</span>
+        <h2 style="margin-top:20px;">Телу нужна <span class="serif">пауза.</span></h2>
+        <p>Массаж и аппаратные процедуры помогают телу переключиться из режима «терпеть» в режим «восстанавливаться». Без спешки, под ваш запрос и ощущения.</p>
+        <a class="btn btn-outline-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Записаться</span><span class="arrow">→</span></a>
+      </div>
+      <div class="l-solution-media ph ph-tone-beige reveal-clip"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES (3-5 max) -->
+  <section class="l-services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="justify-content:center;">Процедуры</span>
+        <h2>С чего <span class="serif">начать.</span></h2>
+      </div>
+      <div class="svc-cards stagger">
+        <div class="svc-cardB">
+          <div class="media ph ph-tone-forest"></div>
+          <div class="body">
+            <h3>Массаж</h3>
+            <p>Классическая работа с телом для снятия напряжения и усталости.</p>
+            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+        <div class="svc-cardB">
+          <div class="media ph ph-tone-gold"></div>
+          <div class="body">
+            <h3>Прессотерапия</h3>
+            <p>Аппаратный массаж давлением — ощущение лёгкости после первого сеанса.</p>
+            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+        <div class="svc-cardB">
+          <div class="media ph ph-tone-beige"></div>
+          <div class="body">
+            <h3>Аппаратные процедуры</h3>
+            <p>Комплексный уход за телом на современном оборудовании.</p>
+            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED OFFER -->
+  <section class="l-offer">
+    <div class="wrap reveal">
+      <span class="eyebrow" style="color:var(--gold);justify-content:center;">Не знаете, с чего начать?</span>
+      <h2 style="margin-top:20px;">Первое знакомство <span class="serif">с Doctor Tonus.</span></h2>
+      <p>Если вы не знаете, какая процедура вам подойдёт, мы поможем выбрать — расскажите о своём запросе при записи.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Подобрать процедуру</span><span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="l-steps">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center;max-width:640px;margin:0 auto;">
+        <span class="eyebrow" style="justify-content:center;">Как это работает</span>
+        <h2 style="margin-top:16px;font-size:clamp(2.2rem,4.4vw,3.4rem);">Три простых <span class="serif">шага.</span></h2>
+      </div>
+      <div class="steps-grid stagger">
+        <div class="step"><div class="num">01</div><h3>Оставляете заявку</h3></div>
+        <div class="step"><div class="num">02</div><h3>Мы подбираем процедуру</h3></div>
+        <div class="step"><div class="num">03</div><h3>Вы приходите и отдыхаете</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="l-proof" id="proof">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="justify-content:center;">Отзывы</span>
+        <h2>Что говорят <span class="serif">наши гости.</span></h2>
+      </div>
+      <div class="reviews-grid stagger">
+        <div class="rev-cardB">
+          <div class="stars">★★★★★</div>
+          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
+          <div class="who">— [ИМЯ]</div>
+        </div>
+        <div class="rev-cardB">
+          <div class="stars">★★★★★</div>
+          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
+          <div class="who">— [ИМЯ]</div>
+        </div>
+        <div class="rev-cardB">
+          <div class="stars">★★★★★</div>
+          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
+          <div class="who">— [ИМЯ]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="l-faq" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center;max-width:none;margin-bottom:56px;">
+        <span class="eyebrow" style="justify-content:center;">Вопросы</span>
+        <h2 style="margin-top:16px;font-size:clamp(2.2rem,4.4vw,3.2rem);">Коротко о <span class="serif">важном.</span></h2>
+      </div>
+      <div class="reveal">
+        <div class="faq-item">
+          <button class="faq-q">Как выбрать процедуру?<span class="plus"></span></button>
+          <div class="faq-a"><p>Оставьте заявку с описанием запроса — администратор поможет подобрать подходящий вариант.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Как проходит первый визит?<span class="plus"></span></button>
+          <div class="faq-a"><p>Приходите немного раньше, мастер уточнит пожелания, затем начинается сама процедура.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Сколько длится сеанс?<span class="plus"></span></button>
+          <div class="faq-a"><p>Зависит от процедуры — точное время уточняется при записи.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Нужно ли заранее готовиться?<span class="plus"></span></button>
+          <div class="faq-a"><p>Специальной подготовки не требуется.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Можно ли записаться через мессенджер?<span class="plus"></span></button>
+          <div class="faq-a"><p>Да, форма на сайте или Telegram / WhatsApp — как вам удобнее.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Сколько стоит первая процедура?<span class="plus"></span></button>
+          <div class="faq-a"><p>Стоимость уточняется при записи в зависимости от выбранной процедуры.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="l-final">
+    <span class="eyebrow" style="color:var(--gold);justify-content:center;">Доктор Тонус</span>
+    <h2 style="margin-top:22px;">Пора <span class="serif">позаботиться</span><br>о себе.</h2>
+    <a class="btn btn-solid-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Записаться</span><span class="arrow">→</span></a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid footer-grid-3">
+      <div class="footer-col">
+        <div class="brand-word" style="color:var(--white);margin-bottom:16px;">ДОКТОР <span class="serif" style="color:var(--gold);">Тонус</span></div>
+        <div style="max-width:34ch;">Массаж и процедуры для тела и разума.</div>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="tel:" data-cfg="phone" data-cfg-href="phoneHref">[ТЕЛЕФОН]</a>
+        <div data-cfg="address">[АДРЕС СТУДИИ]</div>
+        <div data-cfg="workingHours">[ЧАСЫ РАБОТЫ]</div>
+      </div>
+      <div class="footer-col">
+        <h4>Соцсети</h4>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.instagram.com/dr.tonus_studiya/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" href="#" data-cfg-href="vkHref" aria-label="ВКонтакте">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4.5c.2 8 4.4 12.9 11.6 12.9h.7v-4.4c2.5.25 4.4 2.1 5.2 4.4h3.4c-1-3.8-3.7-5.9-5.4-6.7 1.7-1 4-3 4.5-6.2h-3.1c-.7 3-2.8 5-4.6 5.2V4.5h-3.1v7.7c-1.8-.5-4-2.6-4.1-7.7H6z" fill="currentColor" transform="scale(0.8) translate(2,2)"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Доктор Тонус. Все права защищены.</span>
+      <span>Массаж носит оздоровительный характер и не заменяет медицинское лечение.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="mobile-cta-bar">
+  <a class="btn btn-solid-dark" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Записаться</span></a>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
