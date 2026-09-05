@@ -66,25 +66,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ---- carousel (dots and/or arrows) ----
+  // ---- carousel (dots and/or arrows, seamless infinite loop) ----
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".carousel-track");
     const dots = carousel.querySelectorAll(".carousel-dot");
     const prevBtn = carousel.querySelector(".carousel-arrow.prev");
     const nextBtn = carousel.querySelector(".carousel-arrow.next");
-    const count = track.children.length;
-    let index = 0;
-    const go = (i) => {
-      index = (i + count) % count;
+    const real = Array.from(track.children);
+    const count = real.length;
+    if (!count) return;
+
+    // clone the first/last slide on each end so the track can keep sliding
+    // in one direction forever instead of snapping back through every slide
+    const firstClone = real[0].cloneNode(true);
+    const lastClone = real[count - 1].cloneNode(true);
+    firstClone.setAttribute("aria-hidden", "true");
+    lastClone.setAttribute("aria-hidden", "true");
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, real[0]);
+
+    const DURATION = 700; // ms, must match the CSS transition below
+    let index = 1; // position 1 = first real slide (0 is the cloned last slide)
+
+    const setPos = (withTransition) => {
+      track.style.transition = withTransition ? `transform ${DURATION}ms var(--ease)` : "none";
       track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle("active", di === index));
+      if (!withTransition) void track.offsetWidth; // force reflow before re-enabling transition
     };
-    dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
-    if (prevBtn) prevBtn.addEventListener("click", () => go(index - 1));
-    if (nextBtn) nextBtn.addEventListener("click", () => go(index + 1));
-    let auto = setInterval(() => go(index + 1), 7000);
+    setPos(false);
+
+    const updateDots = () => {
+      const realIndex = (index - 1 + count) % count;
+      dots.forEach((d, di) => d.classList.toggle("active", di === realIndex));
+    };
+    updateDots();
+
+    // if the previous move landed on a cloned edge slide, snap back to the
+    // matching real slide instantly (no transition) before moving again -
+    // this runs synchronously on every click, so it works no matter how
+    // fast you click and keeps the sequence exactly 1-2-3-4-1-2-3-4...
+    const normalize = () => {
+      if (index === count + 1) { index = 1; setPos(false); }
+      else if (index === 0) { index = count; setPos(false); }
+    };
+
+    const go = (step) => {
+      normalize();
+      index += step;
+      setPos(true);
+      updateDots();
+    };
+
+    dots.forEach((d, i) => d.addEventListener("click", () => {
+      normalize();
+      index = i + 1;
+      setPos(true);
+      updateDots();
+    }));
+    if (prevBtn) prevBtn.addEventListener("click", () => go(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => go(1));
+    let auto = setInterval(() => go(1), 7000);
     carousel.addEventListener("mouseenter", () => clearInterval(auto));
-    carousel.addEventListener("mouseleave", () => (auto = setInterval(() => go(index + 1), 7000)));
+    carousel.addEventListener("mouseleave", () => (auto = setInterval(() => go(1), 7000)));
   });
 
   // ---- atmosphere horizontal track drag-scroll (Site A) ----
