@@ -8,6 +8,10 @@
 <meta property="og:title" content="ДОКТОР ТОНУС — Верните телу лёгкость">
 <meta property="og:description" content="Массаж и процедуры для тех, кто хочет снова чувствовать себя хорошо.">
 <meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="32x32" href="photoes/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="photoes/favicon-16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="photoes/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photoes/favicon-180.png">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
   /* ---- Site B specific: faster rhythm, punchier blocks ---- */
@@ -33,14 +37,50 @@
   }
 
   /* solution */
-  .l-solution{ background:var(--forest-dark); color:var(--white); padding:0; }
-  .l-solution-grid{ display:grid; grid-template-columns:1fr 1fr; min-height:78vh; }
-  .l-solution-text{ display:flex; flex-direction:column; justify-content:center; padding:80px clamp(28px,6vw,88px); }
+  .l-solution{ background:var(--forest-dark); color:var(--white); padding:130px 0; }
+  .l-solution-grid{ display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:56px; }
+  .l-solution-text{ display:flex; flex-direction:column; justify-content:center; padding:0 clamp(28px,6vw,88px); }
   .l-solution-text h2{ font-size:clamp(2.4rem,4.6vw,3.8rem); color:var(--white); }
   .l-solution-text p{ margin-top:24px; max-width:42ch; color:rgba(250,249,245,.75); font-size:1.05rem; line-height:1.75; }
   .l-solution-text .btn{ margin-top:32px; align-self:flex-start; }
-  .l-solution-media{ min-height:420px; }
-  @media (max-width:920px){ .l-solution-grid{ grid-template-columns:1fr; } }
+
+  .l-solution-media-wrap{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-template-areas:"prev media next";
+    align-items:center; gap:24px;
+    margin-right:clamp(28px,6vw,88px);
+  }
+  .l-solution-media{ grid-area:media; position:relative; width:100%; max-width:420px; aspect-ratio:4/5; overflow:hidden; justify-self:center; }
+  .l-solution-media .carousel-track{ display:flex; height:100%; transition:transform .8s var(--ease); }
+  .slide-img{ flex:0 0 100%; height:100%; }
+  .slide-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .carousel-arrow{
+    flex:none; width:54px; height:54px; border-radius:50%; border:1px solid rgba(250,249,245,.4);
+    background:rgba(250,249,245,.08); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; color:var(--white); cursor:pointer;
+    transition:background .3s ease, border-color .3s ease, transform .3s ease;
+  }
+  .carousel-arrow.prev{ grid-area:prev; }
+  .carousel-arrow.next{ grid-area:next; }
+  .carousel-arrow:hover{ background:var(--gold); border-color:var(--gold); color:var(--forest-dark); transform:scale(1.06); }
+  .carousel-arrow svg{ width:20px; height:20px; }
+
+  @media (max-width:920px){
+    .l-solution-grid{ grid-template-columns:1fr; }
+    .l-solution-media-wrap{ margin:48px auto 0; max-width:460px; }
+  }
+  @media (max-width:640px){
+    .l-solution-media-wrap{
+      grid-template-columns:1fr 1fr;
+      grid-template-areas:
+        "media media"
+        "prev  next";
+      row-gap:28px;
+    }
+    .l-solution-media{ max-width:360px; }
+    .carousel-arrow{ justify-self:center; }
+  }
 
   /* services 3-5 */
   .l-services{ padding:130px 0; }
@@ -48,13 +88,17 @@
   .l-services h2{ font-size:clamp(2.2rem,4.4vw,3.4rem); margin-top:16px; }
   .svc-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
   .svc-cardB{ background:var(--white); padding:0; display:flex; flex-direction:column; }
-  .svc-cardB .media{ aspect-ratio:4/3; }
+  .svc-cardB .media{ aspect-ratio:4/3; overflow:hidden; }
+  .svc-cardB .media img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+  .svc-cardB:hover .media img{ transform:scale(1.05); }
   .svc-cardB .body{ padding:28px 26px 32px; flex:1; display:flex; flex-direction:column; }
   .svc-cardB h3{ font-size:1.25rem; letter-spacing:-0.01em; }
   .svc-cardB p{ margin-top:10px; font-size:0.9rem; color:var(--ink-soft); flex:1; }
-  .svc-meta{ margin-top:16px; display:flex; justify-content:space-between; font-size:0.78rem; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:14px; }
+  .svc-meta{ margin-top:16px; font-size:0.85rem; font-weight:700; color:var(--forest-dark); border-top:1px solid var(--line); padding-top:14px; }
   .svc-cardB .link-underline{ margin-top:18px; }
-  @media (max-width:920px){ .svc-cards{ grid-template-columns:1fr; } }
+  .svc-note{ margin-top:48px; text-align:center; max-width:52ch; margin-left:auto; margin-right:auto; font-size:0.92rem; color:var(--ink-soft); }
+  @media (max-width:920px){ .svc-cards{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .svc-cards{ grid-template-columns:1fr; } }
 
   /* featured offer */
   .l-offer{ background:var(--forest); color:var(--white); padding:120px 0; text-align:center; }
@@ -143,16 +187,31 @@
     </div>
   </section>
 
-  <!-- SOLUTION -->
+  <!-- ABOUT THE PLACE -->
   <section class="l-solution">
     <div class="l-solution-grid">
       <div class="l-solution-text reveal">
-        <span class="eyebrow" style="color:var(--gold);">Решение</span>
-        <h2 style="margin-top:20px;">Телу нужна <span class="serif">пауза.</span></h2>
-        <p>Массаж и аппаратные процедуры помогают телу переключиться из режима «терпеть» в режим «восстанавливаться». Без спешки, под ваш запрос и ощущения.</p>
+        <span class="eyebrow" style="color:var(--gold);">О месте</span>
+        <h2 style="margin-top:20px;">Пространство, где <span class="serif">можно выдохнуть.</span></h2>
+        <p>Уютный кабинет студии — тёплый свет, ароматические свечи и всё для комфортного сеанса. Уже с порога вы чувствуете, что здесь можно расслабиться.</p>
         <a class="btn btn-outline-cream" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl"><span>Записаться</span><span class="arrow">→</span></a>
       </div>
-      <div class="l-solution-media ph ph-tone-beige reveal-clip"></div>
+      <div class="l-solution-media-wrap" data-carousel>
+        <button class="carousel-arrow prev" aria-label="Предыдущее фото">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="l-solution-media">
+          <div class="carousel-track">
+            <div class="slide-img"><img src="photoes/cabinet1.jpg" alt="Кабинет студии Доктор Тонус" loading="lazy"></div>
+            <div class="slide-img"><img src="photoes/cabinet2.jpg" alt="Зона отдыха студии" loading="lazy"></div>
+            <div class="slide-img"><img src="photoes/cabinet3.jpg" alt="Массажный кабинет" loading="lazy"></div>
+            <div class="slide-img"><img src="photoes/cabinet4.jpg" alt="Душевая студии" loading="lazy"></div>
+          </div>
+        </div>
+        <button class="carousel-arrow next" aria-label="Следующее фото">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -165,32 +224,63 @@
       </div>
       <div class="svc-cards stagger">
         <div class="svc-cardB">
-          <div class="media ph ph-tone-forest"></div>
+          <div class="media"><img src="photoes/obschimassage.jpg" alt="Общий классический массаж" loading="lazy"></div>
           <div class="body">
-            <h3>Массаж</h3>
-            <p>Классическая работа с телом для снятия напряжения и усталости.</p>
-            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <h3>Общий классический массаж</h3>
+            <p>Полная расслабляющая проработка тела классической техникой — снимает напряжение и усталость.</p>
+            <div class="svc-meta"><span>от 1500 ₽</span></div>
             <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
           </div>
         </div>
         <div class="svc-cardB">
-          <div class="media ph ph-tone-gold"></div>
+          <div class="media"><img src="photoes/sport.jpg" alt="Спортивный массаж" loading="lazy"></div>
           <div class="body">
-            <h3>Прессотерапия</h3>
-            <p>Аппаратный массаж давлением — ощущение лёгкости после первого сеанса.</p>
-            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <h3>Спортивный массаж</h3>
+            <p>Глубокая работа с мышцами для восстановления после нагрузок и профилактики травм.</p>
+            <div class="svc-meta"><span>2000 ₽</span></div>
             <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
           </div>
         </div>
         <div class="svc-cardB">
-          <div class="media ph ph-tone-beige"></div>
+          <div class="media"><img src="photoes/limf.jpg" alt="Лимфодренажный массаж" loading="lazy"></div>
           <div class="body">
-            <h3>Аппаратные процедуры</h3>
-            <p>Комплексный уход за телом на современном оборудовании.</p>
-            <div class="svc-meta"><span>[PRICE]</span><span>от [PRICE] мин</span></div>
+            <h3>Лимфодренажный массаж</h3>
+            <p>Мягкая техника, которая снимает отёчность и возвращает телу лёгкость.</p>
+            <div class="svc-meta"><span>1300 ₽</span></div>
             <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
           </div>
         </div>
+        <div class="svc-cardB">
+          <div class="media"><img src="photoes/spina.jpg" alt="Оздоровительный массаж спины" loading="lazy"></div>
+          <div class="body">
+            <h3>Оздоровительный массаж спины</h3>
+            <p>Точечная работа со спиной — снимает зажатость от сидячего образа жизни.</p>
+            <div class="svc-meta"><span>от 1400 ₽</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+        <div class="svc-cardB">
+          <div class="media"><img src="photoes/aromo.jpg" alt="Аромамассаж" loading="lazy"></div>
+          <div class="body">
+            <h3>Аромамассаж</h3>
+            <p>Расслабляющий спа-ритуал с натуральными маслами — для полного отключения от дел.</p>
+            <div class="svc-meta"><span>1500 ₽</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+        <div class="svc-cardB">
+          <div class="media"><img src="photoes/child.jpg" alt="Детский массаж" loading="lazy"></div>
+          <div class="body">
+            <h3>Детский массаж</h3>
+            <p>Бережный массаж для самых маленьких пациентов студии.</p>
+            <div class="svc-meta"><span>1200 ₽</span></div>
+            <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Записаться →</a>
+          </div>
+        </div>
+      </div>
+      <p class="svc-note">Это основные направления — весь список процедур и авторские программы можно посмотреть при записи.</p>
+      <div style="text-align:center;margin-top:16px;">
+        <a class="link-underline" href="#" target="_blank" rel="noopener" data-cfg-href="bookingUrl">Смотреть полный прайс →</a>
       </div>
     </div>
   </section>
@@ -215,9 +305,9 @@
         <h2 style="margin-top:16px;font-size:clamp(2.2rem,4.4vw,3.4rem);">Три простых <span class="serif">шага.</span></h2>
       </div>
       <div class="steps-grid stagger">
-        <div class="step"><div class="num">01</div><h3>Оставляете заявку</h3></div>
-        <div class="step"><div class="num">02</div><h3>Мы подбираем процедуру</h3></div>
-        <div class="step"><div class="num">03</div><h3>Вы приходите и отдыхаете</h3></div>
+        <div class="step"><div class="num">01</div><h3>Выбираете процедуру и время</h3></div>
+        <div class="step"><div class="num">02</div><h3>Записываетесь онлайн</h3></div>
+        <div class="step"><div class="num">03</div><h3>Приходите и отдыхаете</h3></div>
       </div>
     </div>
   </section>
@@ -232,18 +322,18 @@
       <div class="reviews-grid stagger">
         <div class="rev-cardB">
           <div class="stars">★★★★★</div>
-          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
-          <div class="who">— [ИМЯ]</div>
+          <blockquote>Расслабляющий массаж в этой клинике — просто топ. Особенно для тех, кто постоянно занимается спортом. Рекомендую.</blockquote>
+          <div class="who">— Степан А.</div>
         </div>
         <div class="rev-cardB">
           <div class="stars">★★★★★</div>
-          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
-          <div class="who">— [ИМЯ]</div>
+          <blockquote>Данил замечательный специалист, профессионал своего дела. Уже после первого сеанса порхаешь как бабочка! Всей семьёй посещаем его центр! Огромное спасибо за ваш труд.</blockquote>
+          <div class="who">— Елена С.</div>
         </div>
         <div class="rev-cardB">
           <div class="stars">★★★★★</div>
-          <blockquote>[РЕАЛЬНЫЙ ОТЗЫВ]</blockquote>
-          <div class="who">— [ИМЯ]</div>
+          <blockquote>Всем советую. Долго мучался со спиной, мастер Данил за несколько сеансов просто спас меня! Огромное спасибо.</blockquote>
+          <div class="who">— Владимир Ш.</div>
         </div>
       </div>
     </div>
@@ -259,7 +349,7 @@
       <div class="reveal">
         <div class="faq-item">
           <button class="faq-q">Как выбрать процедуру?<span class="plus"></span></button>
-          <div class="faq-a"><p>Оставьте заявку с описанием запроса — администратор поможет подобрать подходящий вариант.</p></div>
+          <div class="faq-a"><p>Расскажите о своём запросе при записи — администратор поможет подобрать подходящее направление массажа.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Как проходит первый визит?<span class="plus"></span></button>
@@ -274,12 +364,8 @@
           <div class="faq-a"><p>Специальной подготовки не требуется.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Можно ли записаться через мессенджер?<span class="plus"></span></button>
-          <div class="faq-a"><p>Да, форма на сайте или Telegram / WhatsApp — как вам удобнее.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Сколько стоит первая процедура?<span class="plus"></span></button>
-          <div class="faq-a"><p>Стоимость уточняется при записи в зависимости от выбранной процедуры.</p></div>
+          <button class="faq-q">Сколько стоит процедура?<span class="plus"></span></button>
+          <div class="faq-a"><p>От 1200 ₽ в зависимости от направления — цены на все процедуры указаны в карточках выше или в сервисе записи.</p></div>
         </div>
       </div>
     </div>

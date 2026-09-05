@@ -66,17 +66,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ---- reviews carousel (simple, dot-driven) ----
+  // ---- carousel (dots and/or arrows) ----
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".carousel-track");
     const dots = carousel.querySelectorAll(".carousel-dot");
+    const prevBtn = carousel.querySelector(".carousel-arrow.prev");
+    const nextBtn = carousel.querySelector(".carousel-arrow.next");
+    const count = track.children.length;
     let index = 0;
     const go = (i) => {
-      index = (i + dots.length) % dots.length;
+      index = (i + count) % count;
       track.style.transform = `translateX(-${index * 100}%)`;
       dots.forEach((d, di) => d.classList.toggle("active", di === index));
     };
     dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+    if (prevBtn) prevBtn.addEventListener("click", () => go(index - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => go(index + 1));
     let auto = setInterval(() => go(index + 1), 7000);
     carousel.addEventListener("mouseenter", () => clearInterval(auto));
     carousel.addEventListener("mouseleave", () => (auto = setInterval(() => go(index + 1), 7000)));

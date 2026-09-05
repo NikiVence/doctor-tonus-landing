@@ -83,6 +83,10 @@ h1,h2,h3,h4{ margin:0; font-weight:800; letter-spacing:-0.02em; line-height:1.02
 .btn-outline-cream{ color:var(--cream); border-color:var(--line-on-dark); }
 .btn-outline-cream:hover{ background:var(--cream); color:var(--forest-dark); border-color:var(--cream); }
 
+/* header CTA must stay readable once the header background turns light on scroll */
+.site-header.scrolled .btn-outline-cream{ color:var(--forest-dark); border-color:var(--line); }
+.site-header.scrolled .btn-outline-cream:hover{ background:var(--forest-dark); color:var(--white); border-color:var(--forest-dark); }
+
 .link-underline{
   position:relative; font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
 }
