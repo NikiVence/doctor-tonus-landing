@@ -97,6 +97,13 @@ h1,h2,h3,h4{ margin:0; font-weight:800; letter-spacing:-0.02em; line-height:1.02
 }
 .link-underline:hover::after{ transform:scaleX(1); }
 
+/* underline hidden at rest, grows outward from the center on hover */
+.link-underline-center::after{
+  left:50%; right:50%; transform:none;
+  transition:left .45s var(--ease), right .45s var(--ease);
+}
+.link-underline-center:hover::after{ left:0; right:0; }
+
 /* ---------- placeholder "photography" ----------
    No real photo assets are provided. Rather than stock imagery,
    we render tactile editorial textures in brand tones. */
