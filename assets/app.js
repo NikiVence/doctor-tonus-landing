@@ -10,7 +10,7 @@ const clinicConfig = {
   bookingUrl: "https://dikidi.net/1715258",
   phone: "[ТЕЛЕФОН]",
   phoneHref: "tel:", // TODO: add real number
-  vkHref: "#", // TODO: add real vk.com/... link
+  vkHref: "https://vk.ru/dr.tonus",
   address: "г. Волжский, ул. 87 Гвардейской, 21",
   workingHours: "Ежедневно, 9:00–20:00",
 };
