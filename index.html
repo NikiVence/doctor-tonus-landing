@@ -63,7 +63,10 @@
   }
   .carousel-arrow.prev{ grid-area:prev; }
   .carousel-arrow.next{ grid-area:next; }
-  .carousel-arrow:hover{ background:var(--gold); border-color:var(--gold); color:var(--forest-dark); transform:scale(1.06); }
+  @media (hover:hover) and (pointer:fine){
+    .carousel-arrow:hover{ background:var(--gold); border-color:var(--gold); color:var(--forest-dark); transform:scale(1.06); }
+  }
+  .carousel-arrow:active{ background:var(--gold); border-color:var(--gold); color:var(--forest-dark); transform:scale(0.94); }
   .carousel-arrow svg{ width:20px; height:20px; }
 
   @media (max-width:920px){
